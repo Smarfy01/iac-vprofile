@@ -39,6 +39,11 @@ jobs:
           echo "Setting AWS and bucket credentials"
           echo "BUCKET_TF_STATE=${{ secrets.BUCKET_TF_STATE }}" >> $GITHUB_ENV
 
+      - name: Print environment variables
+        run: |
+          echo "BUCKET_TF_STATE=${{ secrets.BUCKET_TF_STATE }}"
+          echo "AWS_REGION=${{ env.AWS_REGION }}"
+
       - name: Terraform init
         id: init
         run: terraform init -backend-config="bucket=${{ secrets.BUCKET_TF_STATE }}" -backend-config="region=${{ env.AWS_REGION }}"
